@@ -1,0 +1,31 @@
+logging:
+  level:
+    io.rsocket: info
+spring:
+  output:
+    ansi:
+      enabled: always
+#  cloud:
+#    gateway:
+#      rsocket:
+#        client:
+#          broker:
+#            host: gateway1-127-0-0-1.nip.io
+#            port: 7001
+#            #host: gateway2-127-0-0-1.nip.io
+#            #port: 7002
+#            ##host: gateway3-127-0-0-1.nip.io
+#            ##port: 7003
+  cloud:
+    gateway:
+      rsocket:
+        client:
+          route-id: 555
+          service-name: pong
+          tags:
+            INSTANCE_NAME: pong-in-1
+          broker:
+            host: gateway2-127-0-0-1.nip.io
+            port: 7002
+server:
+  port: 8002

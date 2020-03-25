@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="PingApplication2" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" folderName="run-next">
+    <module name="ping" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="daggerok.ping.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="SPRING_BOOT_MAIN_CLASS" value="daggerok.ping.PingApplication" />
+    <option name="ACTIVE_PROFILES" value="ping2" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

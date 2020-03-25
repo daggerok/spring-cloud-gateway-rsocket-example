@@ -1,0 +1,63 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+  application:
+    name: gateway
+logging:
+  level:
+    org.springframework.cloud.gateway.rsocket: DEBUG
+---
+spring:
+  profiles: gateway1
+  rsocket:
+    server:
+      port: 7001
+  cloud:
+    gateway:
+      rsocket:
+        id: ${spring.profiles}
+        route-id: 111
+        service-name: ${spring.application.name}
+        brokers:
+            - host: gateway2-127-0-0-1.nip.io
+              port: 7002
+            - host: gateway3-127-0-0-1.nip.io
+              port: 7003
+---
+spring:
+  profiles: >
+    gateway2
+  rsocket:
+    server:
+      port: 7002
+  cloud:
+    gateway:
+      rsocket:
+        id: ${spring.profiles}
+        route-id: 222
+        service-name: ${spring.application.name}
+        brokers:
+          - host: gateway1-127-0-0-1.nip.io
+            port: 7001
+          - host: gateway3-127-0-0-1.nip.io
+            #host: 127.0.0.1
+            port: 7003
+#---
+#spring:
+#  profiles:
+#    - gateway3
+#  rsocket:
+#    server:
+#      port: 7003
+#  cloud:
+#    gateway:
+#      rsocket:
+#        id: ${spring.profiles}
+#        route-id: 333
+#        service-name: ${spring.application.name}
+#        brokers:
+#          - host: gateway1-127-0-0-1.nip.io
+#            port: 7001
+#          - host: gateway2-127-0-0-1.nip.io
+#            port: 7002
