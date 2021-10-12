@@ -34,17 +34,16 @@ jobs:
     - uses: actions/setup-java@v1
       with:
         java-version: ${{ env.JAVA_VERSION }}
-    - run: cd $GITHUB_WORKSPACE ; ./mvnw clean ; ./mvnw
+    #- run: cd $GITHUB_WORKSPACE ; ./mvnw clean ; ./mvnw
     - run: |
-        ./mvnw spring-boot:start -f gateway -Pgw1
+        source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+        stop_any 7001 7002 7003 7004 8080 8081 8082 8083 8084 8085
+        ./mvnw compile spring-boot:start -f gateway -Pgw1
+        ./mvnw compile spring-boot:start -f gateway -Pgw2
+        ./mvnw compile spring-boot:start -f gateway -Pgw3
+        ./mvnw compile spring-boot:start -f pong
         sleep 3s
-        ./mvnw spring-boot:start -f gateway -Pgw2
-        sleep 3s
-        ./mvnw spring-boot:start -f gateway -Pgw3
-        sleep 3s
-        ./mvnw spring-boot:start -f pong
-        sleep 3s
-        ./mvnw spring-boot:start -f ping
+        ./mvnw compile spring-boot:start -f ping
         sleep 30s
   dependency-updates:
     if: contains(github.event.inputs.trigger, 'M')
