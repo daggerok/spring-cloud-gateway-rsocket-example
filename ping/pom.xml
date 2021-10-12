@@ -41,7 +41,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <jmxPort>9004</jmxPort>
+          <jmxPort>9006</jmxPort>
         </configuration>
       </plugin>
     </plugins>

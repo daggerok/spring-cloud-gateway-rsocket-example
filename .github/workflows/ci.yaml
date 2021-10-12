@@ -30,7 +30,6 @@ jobs:
           ~/.m2/repository
           !~/.m2/repository/com/gituhb/daggerok
         key: ${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
-    - uses: actions/setup-node@v2
     - uses: actions/setup-java@v1
       with:
         java-version: ${{ env.JAVA_VERSION }}
