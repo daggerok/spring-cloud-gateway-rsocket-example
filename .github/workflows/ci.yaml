@@ -45,7 +45,7 @@ jobs:
         ./mvnw compile spring-boot:start -f pong
         sleep 3s
         ./mvnw compile spring-boot:start -f ping
-        sleep 30s
+        sleep 10s
   dependency-updates:
     if: contains(github.event.inputs.trigger, 'M')
       || startsWith(github.event.inputs.trigger, 'm')

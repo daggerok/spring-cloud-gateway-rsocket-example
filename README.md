@@ -1,4 +1,4 @@
-# spring-cloud-gateway-rsocket example
+# spring-cloud-gateway-rsocket example [![CI](https://github.com/daggerok/spring-cloud-gateway-rsocket-example/actions/workflows/ci.yaml/badge.svg)](https://github.com/daggerok/spring-cloud-gateway-rsocket-example/actions/workflows/ci.yaml)
 Polyglot RSocket clients communication via RSocket gateway cluster...
 
 ```
@@ -14,6 +14,12 @@ Polyglot RSocket clients communication via RSocket gateway cluster...
 * no service mesh
 * no sidecar
 * no circuit breaker
+
+## deprecation
+
+Unfortunately, that project has been deprecated. See: https://github.com/rsocket-routing/rsocket-routing-broker instead
+
+Updated project example repository located here: https://github.com/daggerok/rsocket-routing-example
 
 ## getting started
 
