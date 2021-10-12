@@ -37,9 +37,13 @@ jobs:
     - run: cd $GITHUB_WORKSPACE ; ./mvnw clean ; ./mvnw
     - run: |
         ./mvnw spring-boot:start -f gateway -Pgw1
+        sleep 3s
         ./mvnw spring-boot:start -f gateway -Pgw2
+        sleep 3s
         ./mvnw spring-boot:start -f gateway -Pgw3
+        sleep 3s
         ./mvnw spring-boot:start -f pong
+        sleep 3s
         ./mvnw spring-boot:start -f ping
         sleep 30s
   dependency-updates:
