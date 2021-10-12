@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="PingApplication1" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" folderName="run-next">
+  <configuration default="false" name="ping" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <module name="ping" />
     <extension name="coverage">
       <pattern>
@@ -9,6 +9,7 @@
     </extension>
     <option name="SPRING_BOOT_MAIN_CLASS" value="daggerok.ping.PingApplication" />
     <option name="ALTERNATIVE_JRE_PATH" />
+    <option name="SHORTEN_COMMAND_LINE" value="NONE" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

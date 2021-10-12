@@ -15,14 +15,27 @@ Polyglot RSocket clients communication via RSocket gateway cluster...
 * no sidecar
 * no circuit breaker
 
+## getting started
+
+start _r-socket gateway cluster_ run _ping-pong_ apps
+
 ```bash
-./mvnw
+./mvnw compile spring-boot:start -f gateway -Pgw1
+./mvnw compile spring-boot:start -f gateway -Pgw2
+./mvnw compile spring-boot:start -f gateway -Pgw3
+./mvnw compile spring-boot:start -f pong
+./mvnw compile spring-boot:start -f ping
+```
 
-SPRING_PROFILES_ACTIVE=gateway1 java -jar ./gateway/target/*.jar
-SPRING_PROFILES_ACTIVE=gateway2 java -jar ./gateway/target/*.jar
+after all _tear down_ everything
 
-java -jar ./ping-pong/pong/target/*.jar
-java -jar ./ping-pong/ping/target/*.jar
+```bash
+#./mvnw spring-boot:stop -f pong
+#./mvnw spring-boot:stop -f ping
+#./mvnw spring-boot:stop -f gateway -Pgw3
+#./mvnw spring-boot:stop -f gateway -Pgw2
+#./mvnw spring-boot:stop -f gateway -Pgw1
+killall java
 ```
 
 ## Versions

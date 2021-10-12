@@ -1,0 +1,32 @@
+logging:
+  level:
+    io.rsocket: info
+spring:
+  output:
+    ansi:
+      enabled: always
+  cloud:
+    gateway:
+      rsocket:
+        client:
+          route-id: 4
+          service-name: ping
+          tags:
+            INSTANCE_NAME: ping-1
+          broker:
+            host: gateway1-127-0-0-1.nip.io
+            port: 7001
+          forwarding:
+            gw2:
+              host: gateway2-127-0-0-1.nip.io
+              port: 7002
+            gw3:
+              host: gateway3-127-0-0-1.nip.io
+              port: 7003
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+server:
+  port: 8084

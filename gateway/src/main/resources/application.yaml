@@ -1,63 +1,95 @@
+logging:
+  level:
+    org.springframework.cloud.gateway.rsocket: DEBUG
 spring:
   output:
     ansi:
       enabled: always
   application:
     name: gateway
-logging:
-  level:
-    org.springframework.cloud.gateway.rsocket: DEBUG
+  cloud:
+    gateway:
+      rsocket:
+        service-name: ${spring.application.name}
+brokers:
+  gateway1:
+    host: gateway1-127-0-0-1.nip.io
+    port: 7001
+  gateway2:
+    host: gateway2-127-0-0-1.nip.io
+    port: 7002
+  gateway3:
+    host: gateway3-127-0-0-1.nip.io
+    port: 7003
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
+server:
+  port: 8080
 ---
 spring:
   profiles: gateway1
   rsocket:
     server:
-      port: 7001
+      port: ${brokers.gateway1.port}
   cloud:
     gateway:
       rsocket:
         id: ${spring.profiles}
-        route-id: 111
-        service-name: ${spring.application.name}
+        route-id: 1
         brokers:
-            - host: gateway2-127-0-0-1.nip.io
-              port: 7002
-            - host: gateway3-127-0-0-1.nip.io
-              port: 7003
+          - host: ${brokers.gateway2.host}
+            port: ${brokers.gateway2.port}
+          - host: ${brokers.gateway3.host}
+            port: ${brokers.gateway3.port}
+server:
+  port: 8081
 ---
 spring:
   profiles: >
     gateway2
   rsocket:
     server:
-      port: 7002
+      port: ${brokers.gateway2.port}
   cloud:
     gateway:
       rsocket:
         id: ${spring.profiles}
-        route-id: 222
-        service-name: ${spring.application.name}
+        route-id: 2
         brokers:
-          - host: gateway1-127-0-0-1.nip.io
-            port: 7001
-          - host: gateway3-127-0-0-1.nip.io
-            #host: 127.0.0.1
-            port: 7003
-#---
-#spring:
-#  profiles:
-#    - gateway3
-#  rsocket:
-#    server:
-#      port: 7003
-#  cloud:
-#    gateway:
-#      rsocket:
-#        id: ${spring.profiles}
-#        route-id: 333
-#        service-name: ${spring.application.name}
-#        brokers:
-#          - host: gateway1-127-0-0-1.nip.io
-#            port: 7001
-#          - host: gateway2-127-0-0-1.nip.io
-#            port: 7002
+        - host: ${brokers.gateway1.host}
+          port: ${brokers.gateway1.port}
+        - host: ${brokers.gateway3.host}
+          port: ${brokers.gateway3.port}
+server:
+  port: 8082
+---
+spring:
+  profiles:
+    - gateway3
+  rsocket:
+    server:
+      port: ${brokers.gateway3.port}
+  cloud:
+    gateway:
+      rsocket:
+        id: ${spring.profiles}
+        route-id: 3
+        brokers:
+        - host: ${brokers.gateway1.host}
+          port: ${brokers.gateway1.port}
+        - host: ${brokers.gateway2.host}
+          port: ${brokers.gateway2.port}
+  port: 8083
+---
+spring:
+  profiles: docker
+brokers:
+  gateway1:
+    host: gateway1
+  gateway2:
+    host: gateway2
+  gateway3:
+    host: gateway3

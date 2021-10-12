@@ -1,0 +1,40 @@
+version: '2.1'
+networks:
+  my-apps:
+services:
+  gateway1:
+    image: adoptopenjdk:11.0.11_9-jre-openj9-0.26.0-focal
+    networks: [my-apps]
+    volumes:
+    - './gateway/target:/tmp/app'
+    command:
+    - java
+    - -jar
+    - /tmp/app/gateway-1.0.0-SNAPSHOT.jar
+    environment:
+      SPRING_PROFILES_ACTIVE: docker,gateway1
+    ports: ['7001:7001']
+  gateway2:
+    image: adoptopenjdk:11.0.11_9-jre-openj9-0.26.0-focal
+    networks: [my-apps]
+    volumes:
+    - './gateway/target:/tmp/app'
+    command:
+    - java
+    - -jar
+    - /tmp/app/gateway-1.0.0-SNAPSHOT.jar
+    environment:
+      SPRING_PROFILES_ACTIVE: docker,gateway2
+    ports: ['7002:7002']
+  gateway3:
+    image: adoptopenjdk:11.0.11_9-jre-openj9-0.26.0-focal
+    networks: [my-apps]
+    volumes:
+    - './gateway/target:/tmp/app'
+    command:
+    - java
+    - -jar
+    - /tmp/app/gateway-1.0.0-SNAPSHOT.jar
+    environment:
+      SPRING_PROFILES_ACTIVE: docker,gateway3
+    ports: ['7003:7003']

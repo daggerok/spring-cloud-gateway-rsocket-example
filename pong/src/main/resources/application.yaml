@@ -20,12 +20,24 @@ spring:
     gateway:
       rsocket:
         client:
-          route-id: 555
+          route-id: 5
           service-name: pong
           tags:
-            INSTANCE_NAME: pong-in-1
+            INSTANCE_NAME: pong-1
           broker:
             host: gateway2-127-0-0-1.nip.io
             port: 7002
+          forwarding:
+            gw1:
+              host: gateway1-127-0-0-1.nip.io
+              port: 7001
+            gw3:
+              host: gateway3-127-0-0-1.nip.io
+              port: 7003
+management:
+  endpoint:
+    health:
+      enabled: true
+      show-details: always
 server:
-  port: 8002
+  port: 8085
