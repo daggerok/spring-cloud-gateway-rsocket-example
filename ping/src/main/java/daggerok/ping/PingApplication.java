@@ -5,6 +5,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.rsocket.client.BrokerClient;
+import org.springframework.cloud.gateway.rsocket.client.ClientProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.rsocket.RSocketRequester;
@@ -25,8 +26,8 @@ class PingClientConfig {
   }
 
   @Bean
-  Mono<RSocketRequester> rsr(RSocketRequester.Builder builder) {
-    return builder.connectTcp("gateway1-127-0-0-1.nip.io", 7001)
+  Mono<RSocketRequester> rsr(RSocketRequester.Builder builder, ClientProperties props) {
+    return builder.connectTcp(props.getBroker().getHost(), props.getBroker().getPort())
                   .retry()
                   // .retry(err -> err.toString().contains("Route Id already registered")
                   //     || err.toString().contains("Could not emit tick")
